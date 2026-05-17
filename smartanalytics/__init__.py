@@ -1,3 +1,5 @@
+import os
+import secrets
 from pathlib import Path
 
 from flask import Flask
@@ -13,7 +15,7 @@ def create_app(test_config=None):
         static_folder=str(project_root / "static"),
     )
     app.config.update(
-        SECRET_KEY="dev",
+        SECRET_KEY=os.environ.get("SMARTANALYTICS_SECRET_KEY", secrets.token_hex(32)),
         MAX_CONTENT_LENGTH=16 * 1024 * 1024,
         PROCESSED_DATA=None,
         ANALYTICS_CACHE=None,

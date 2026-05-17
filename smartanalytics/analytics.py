@@ -8,11 +8,15 @@ REQUIRED_COLUMNS = {"customer_id", "signup_date", "last_activity_date", "status"
 CHURN_STATUSES = {"cancelled", "churned", "inactive"}
 
 
+class CsvValidationError(ValueError):
+    pass
+
+
 def load_and_clean_csv(file_stream) -> pd.DataFrame:
     df = pd.read_csv(file_stream)
     missing = REQUIRED_COLUMNS - set(df.columns)
     if missing:
-        raise ValueError(f"Missing required columns: {', '.join(sorted(missing))}")
+        raise CsvValidationError(f"Missing required columns: {', '.join(sorted(missing))}")
 
     cleaned = df.copy()
     cleaned = cleaned.dropna(subset=list(REQUIRED_COLUMNS))

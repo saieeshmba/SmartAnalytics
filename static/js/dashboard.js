@@ -43,6 +43,7 @@ async function loadAnalytics() {
       labels: cohorts.map((item) => item.cohort_month),
       datasets: [{ label: "Churn Rate %", data: cohorts.map((item) => item.churn_rate), backgroundColor: "#0d6efd" }],
     },
+    options: { responsive: true, maintainAspectRatio: false },
   }, cohortChart);
 
   trendChart = renderChart(document.getElementById("trendChart"), {
@@ -51,6 +52,7 @@ async function loadAnalytics() {
       labels: trends.map((item) => item.activity_month),
       datasets: [{ label: "Churn Rate %", data: trends.map((item) => item.churn_rate), borderColor: "#dc3545", tension: 0.2 }],
     },
+    options: { responsive: true, maintainAspectRatio: false },
   }, trendChart);
 
   const planSegments = segments.plan || [];
@@ -60,6 +62,7 @@ async function loadAnalytics() {
       labels: planSegments.map((item) => item.plan),
       datasets: [{ label: "Churn Rate %", data: planSegments.map((item) => item.churn_rate), backgroundColor: "#198754" }],
     },
+    options: { responsive: true, maintainAspectRatio: false },
   }, segmentChart);
 }
 

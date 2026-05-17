@@ -40,7 +40,7 @@ class DashboardApiTestCase(unittest.TestCase):
             content_type="multipart/form-data",
         )
         self.assertEqual(response.status_code, 400)
-        self.assertIn("Missing required columns", response.get_json()["error"])
+        self.assertIn("Invalid CSV format", response.get_json()["error"])
 
     def test_export_returns_csv(self):
         self._upload_sample()
@@ -48,6 +48,22 @@ class DashboardApiTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn("text/csv", response.content_type)
         self.assertIn("total_customers", response.data.decode("utf-8"))
+
+    def test_cohorts_trends_segments_endpoints(self):
+        self._upload_sample()
+
+        cohorts = self.client.get("/api/cohorts")
+        self.assertEqual(cohorts.status_code, 200)
+        self.assertTrue(len(cohorts.get_json()) >= 1)
+
+        trends = self.client.get("/api/trends")
+        self.assertEqual(trends.status_code, 200)
+        self.assertTrue(len(trends.get_json()) >= 1)
+
+        segments = self.client.get("/api/segments")
+        self.assertEqual(segments.status_code, 200)
+        payload = segments.get_json()
+        self.assertIn("plan", payload)
 
 
 if __name__ == "__main__":
