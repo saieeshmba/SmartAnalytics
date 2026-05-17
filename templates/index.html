@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartAnalytics | Upload</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+  <main class="container">
+    <h1>SmartAnalytics</h1>
+    <p class="subtitle">Upload a CSV file and explore your data with a beginner-friendly dashboard.</p>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert">{{ messages[0] }}</div>
+      {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('main.upload_file') }}" method="post" enctype="multipart/form-data" class="card">
+      <label for="dataset">Choose CSV file</label>
+      <input type="file" id="dataset" name="dataset" accept=".csv" required />
+      <button type="submit">Upload and Analyze</button>
+    </form>
+  </main>
+</body>
+</html>

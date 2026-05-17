@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartAnalytics | Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+  <main class="container">
+    <h1>Dashboard</h1>
+    <p class="subtitle">File: <strong>{{ filename }}</strong></p>
+    <a class="back-link" href="{{ url_for('main.index') }}">← Upload another file</a>
+
+    <section class="card">
+      <h2>Dataset Overview</h2>
+      <p>Rows: <strong>{{ analysis.rows }}</strong> | Columns: <strong>{{ analysis.columns }}</strong></p>
+      <p>Column names: {{ analysis.column_names | join(', ') }}</p>
+    </section>
+
+    <section class="card">
+      <h2>Quick Insights</h2>
+      <ul>
+        {% for insight in analysis.insights %}
+          <li>{{ insight }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Missing Values by Column</h2>
+      <ul>
+        {% for col, val in analysis.missing_values.items() %}
+          <li><strong>{{ col }}</strong>: {{ val }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Preview (first 10 rows)</h2>
+      {% if analysis.preview_rows %}
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                {% for col in analysis.column_names %}
+                  <th>{{ col }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in analysis.preview_rows %}
+                <tr>
+                  {% for col in analysis.column_names %}
+                    <td>{{ row[col] }}</td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p>No data preview available.</p>
+      {% endif %}
+    </section>
+
+    {% if analysis.histogram_html %}
+      <section class="card">
+        <h2>Distribution Chart</h2>
+        {{ analysis.histogram_html | safe }}
+      </section>
+    {% endif %}
+
+    {% if analysis.correlation_html %}
+      <section class="card">
+        <h2>Correlation Heatmap</h2>
+        {{ analysis.correlation_html | safe }}
+      </section>
+    {% endif %}
+  </main>
+</body>
+</html>

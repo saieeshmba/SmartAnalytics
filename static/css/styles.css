@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  color: #1f2937;
+}
+
+.container {
+  width: min(960px, 92%);
+  margin: 2rem auto;
+}
+
+h1, h2 {
+  margin-top: 0;
+}
+
+.subtitle {
+  color: #4b5563;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.alert {
+  margin: 1rem 0;
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+
+form.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+input[type="file"] {
+  padding: 0.5rem;
+}
+
+button {
+  width: fit-content;
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+th {
+  background: #f9fafb;
+}

@@ -1,54 +1,67 @@
 # SmartAnalytics – Full Stack Data Analytics Platform
 
 ## 📊 Project Overview
-SmartAnalytics is a full-stack data analytics web application built using Python (Flask) and data science tools.  
-It allows users to upload datasets, perform data analysis, and visualize insights through interactive dashboards.
-
----
+SmartAnalytics is a beginner-friendly full-stack data analytics web app.
+Users can upload CSV files, get quick analysis, and view charts in a dashboard.
 
 ## 🚀 Features
 - Upload CSV datasets
-- Data cleaning and preprocessing
-- Exploratory Data Analysis (EDA)
-- Data visualization (charts & graphs)
-- Basic insights generation
-- Simple web dashboard interface
-
----
+- Data analysis with Pandas and NumPy
+- Quick insights (shape, missing values, numeric summary)
+- Interactive charts using Plotly
+- Simple Flask + HTML/CSS architecture
 
 ## 🛠️ Tech Stack
-- Frontend: HTML, CSS, JavaScript  
-- Backend: Python (Flask)  
-- Data Science: Pandas, NumPy, Matplotlib, Seaborn  
-- Database: CSV / SQLite  
+- **Backend:** Python, Flask
+- **Data Analysis:** Pandas, NumPy
+- **Visualization:** Plotly
+- **Frontend:** HTML, CSS
 
----
-
-## 📁 Project Structure
+## 📁 Clean Folder Structure
+```text
 SmartAnalytics/
-│
 ├── app.py
 ├── requirements.txt
-├── static/
-│   └── css/
+├── Readme.md
+├── uploads/
+│   └── .gitkeep
+├── smartanalytics/
+│   ├── __init__.py
+│   ├── routes.py
+│   └── analysis.py
 ├── templates/
 │   ├── index.html
 │   └── dashboard.html
-├── data/
-└── README.md
+└── static/
+    └── css/
+        └── styles.css
+```
 
----
+## ✅ Step-by-Step Setup
+1. Clone the repository and move into it.
+2. Create and activate a virtual environment.
+3. Install dependencies from `requirements.txt`.
+4. Run the Flask app.
+5. Open the app in your browser and upload a CSV file.
 
-## 📈 Use Case
-This project demonstrates how raw data can be transformed into meaningful insights using data science and presented through a full-stack web application.
+### Commands
+```bash
+python -m venv .venv
+source .venv/bin/activate   # Linux/Mac
+# .venv\Scripts\activate    # Windows PowerShell
 
----
+pip install -r requirements.txt
+python app.py
+```
+
+Open: `http://127.0.0.1:5000`
+
+## 📈 How It Works
+1. User uploads a `.csv` file from the upload page.
+2. Flask saves the file in `uploads/`.
+3. The backend reads data with Pandas.
+4. NumPy/Pandas generate basic stats and insights.
+5. Plotly creates visualizations for the dashboard.
 
 ## 🎯 Goal
-To build a simple but powerful data analytics platform suitable for business insights and decision-making.
-
----
-
-## 👨‍💻 Author
-Saieesh Naik  
-Data Analyst | Python | SQL | Power BI | Full Stack Developer
+Provide a simple, working, and beginner-friendly analytics project that demonstrates full-stack integration with data science workflows.
