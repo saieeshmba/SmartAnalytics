@@ -1,54 +1,42 @@
-# SmartAnalytics – Full Stack Data Analytics Platform
+# SmartAnalytics – Customer Churn Insights Dashboard
 
 ## 📊 Project Overview
-SmartAnalytics is a full-stack data analytics web application built using Python (Flask) and data science tools.  
-It allows users to upload datasets, perform data analysis, and visualize insights through interactive dashboards.
-
----
+This project is a job-ready full-stack analytics app for churn analysis.  
+Users upload customer activity CSV data, the Flask backend processes it with Pandas, and a Bootstrap + Chart.js dashboard displays churn insights.
 
 ## 🚀 Features
-- Upload CSV datasets
-- Data cleaning and preprocessing
-- Exploratory Data Analysis (EDA)
-- Data visualization (charts & graphs)
-- Basic insights generation
-- Simple web dashboard interface
-
----
+- CSV upload and validation
+- Data cleaning + feature engineering (tenure, cohort month, activity month)
+- Churn and retention summary metrics
+- Cohort analytics and monthly churn trends
+- Segment analytics (plan/location when available)
+- CSV export for summary reporting
 
 ## 🛠️ Tech Stack
-- Frontend: HTML, CSS, JavaScript  
-- Backend: Python (Flask)  
-- Data Science: Pandas, NumPy, Matplotlib, Seaborn  
-- Database: CSV / SQLite  
+- Python 3.x
+- Flask
+- Pandas
+- HTML/CSS/Bootstrap
+- JavaScript + Chart.js
+- SQLite (optional extension)
 
----
+## 📁 Key Endpoints
+- `POST /api/upload` – upload and process CSV
+- `GET /api/summary` – top churn KPIs
+- `GET /api/cohorts` – cohort-level churn
+- `GET /api/trends` – monthly churn trend
+- `GET /api/segments` – plan/location churn segments
+- `GET /api/export/summary.csv` – downloadable report
 
-## 📁 Project Structure
-SmartAnalytics/
-│
-├── app.py
-├── requirements.txt
-├── static/
-│   └── css/
-├── templates/
-│   ├── index.html
-│   └── dashboard.html
-├── data/
-└── README.md
+## ▶️ Run Locally
+```bash
+pip install -r requirements.txt
+python app.py
+```
 
----
+Then open `http://127.0.0.1:5000`.
 
-## 📈 Use Case
-This project demonstrates how raw data can be transformed into meaningful insights using data science and presented through a full-stack web application.
-
----
-
-## 🎯 Goal
-To build a simple but powerful data analytics platform suitable for business insights and decision-making.
-
----
-
-## 👨‍💻 Author
-Saieesh Naik  
-Data Analyst | Python | SQL | Power BI | Full Stack Developer
+## 🧪 Run Tests
+```bash
+python -m unittest discover -s tests -p "test*.py" -v
+```

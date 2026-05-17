@@ -1,0 +1,9 @@
+.metric-label {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.metric-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
