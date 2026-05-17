@@ -40,7 +40,7 @@ class DashboardApiTestCase(unittest.TestCase):
             content_type="multipart/form-data",
         )
         self.assertEqual(response.status_code, 400)
-        self.assertIn("Invalid CSV format", response.get_json()["error"])
+        self.assertIn("Missing required columns", response.get_json()["error"])
 
     def test_export_returns_csv(self):
         self._upload_sample()

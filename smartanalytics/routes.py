@@ -2,7 +2,7 @@ import io
 
 from flask import Blueprint, current_app, jsonify, render_template, request, send_file
 
-from .analytics import CsvValidationError, REQUIRED_COLUMNS, build_analytics, build_summary_export_csv, load_and_clean_csv
+from .analytics import CsvValidationError, build_analytics, build_summary_export_csv, load_and_clean_csv
 
 
 dashboard_bp = Blueprint("dashboard", __name__)
@@ -30,9 +30,8 @@ def upload_file():
 
     try:
         dataframe = load_and_clean_csv(uploaded_file)
-    except CsvValidationError:
-        required = ", ".join(sorted(REQUIRED_COLUMNS))
-        return jsonify({"error": f"Invalid CSV format. Required columns: {required}."}), 400
+    except CsvValidationError as exc:
+        return jsonify({"error": str(exc)}), 400
     except Exception:
         return jsonify({"error": "Unable to process file. Ensure it is a valid CSV."}), 400
 
