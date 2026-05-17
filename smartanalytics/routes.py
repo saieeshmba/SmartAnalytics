@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 from flask import Blueprint, current_app, flash, redirect, render_template, request, url_for
@@ -38,7 +37,6 @@ def upload_file():
         return redirect(url_for("main.index"))
 
     upload_folder = Path(current_app.config["UPLOAD_FOLDER"])
-    upload_folder.mkdir(parents=True, exist_ok=True)
 
     filename = secure_filename(file.filename)
     file_path = upload_folder / filename
@@ -49,15 +47,22 @@ def upload_file():
 
 @main.route("/dashboard", methods=["GET"])
 def dashboard():
-    filename = request.args.get("filename", "")
+    raw_filename = request.args.get("filename", "")
+    filename = secure_filename(raw_filename)
     if not filename:
         flash("Upload a CSV file to view the dashboard.")
         return redirect(url_for("main.index"))
 
-    file_path = os.path.join(current_app.config["UPLOAD_FOLDER"], filename)
-    if not os.path.exists(file_path):
+    upload_folder = Path(current_app.config["UPLOAD_FOLDER"]).resolve()
+    file_path = (upload_folder / filename).resolve()
+
+    if upload_folder not in file_path.parents:
+        flash("Invalid file path.")
+        return redirect(url_for("main.index"))
+
+    if not file_path.exists():
         flash("File not found. Please upload again.")
         return redirect(url_for("main.index"))
 
-    analysis = analyze_dataset(file_path)
+    analysis = analyze_dataset(str(file_path))
     return render_template("dashboard.html", filename=filename, analysis=analysis)

@@ -41,7 +41,7 @@ def analyze_dataset(file_path: str) -> dict[str, Any]:
 
     if not numeric_df.empty:
         total_missing = int(df.isnull().sum().sum())
-        mean_values = numeric_df.mean(numeric_only=True)
+        mean_values = numeric_df.mean()
         top_mean_col = mean_values.idxmax() if not mean_values.empty else None
 
         if top_mean_col:
